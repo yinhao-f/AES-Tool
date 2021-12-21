@@ -27,3 +27,6 @@ replay_pid*
 
 # Custom
 *.txt
+/.idea/artifacts/AES_Tool_jar.xml
+*META-INF/
+*.key
