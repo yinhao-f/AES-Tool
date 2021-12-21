@@ -1,8 +1,8 @@
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -20,20 +20,19 @@ public class GenerateKeyToFile {
         Date currentDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String fileName = simpleDateFormat.format(currentDate) + ".key";
+        File f = new File(fileName);
 
-        OutputStream f = new FileOutputStream(fileName);
+        // Prevent overwriting key files
+        if (f.exists()) {
+            throw new IOException("Key just generated. Please try again later.");
+        }
+
+        FileOutputStream fos = new FileOutputStream(f);
         String keyString = Base64.getEncoder().encodeToString(secretKey.getEncoded());
-        f.write(keyString.getBytes(StandardCharsets.UTF_8));
-        f.flush();
-        f.close();
+        fos.write(keyString.getBytes(StandardCharsets.UTF_8));
+        fos.flush();
+        fos.close();
 
-        // Read the secret key
-//        InputStream inputStream = new FileInputStream("SecretKey.txt");
-//        StringBuilder stringBuilder = new StringBuilder();
-//        while (inputStream.available() > 0) {
-//            stringBuilder.append((char) inputStream.read());
-//        }
-//        String keyRead = stringBuilder.toString();
-//        System.out.println(keyRead);
+        System.out.println("Generated key in " + f.getAbsolutePath());
     }
 }
