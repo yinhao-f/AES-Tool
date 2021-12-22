@@ -2,6 +2,8 @@ package utility;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
@@ -22,7 +24,6 @@ public class Encryption {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -37,7 +38,11 @@ public class Encryption {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    public static SecretKey keyRetriever(File keyFile) {
+        String keyString = FileIO.readFromFile(keyFile);
+        return new SecretKeySpec(base64Decoder.decode(keyString), "AES");
     }
 }
