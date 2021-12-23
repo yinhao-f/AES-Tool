@@ -62,7 +62,7 @@ public class FileIO {
      */
     public static String fileNameGenerator(String extension) {
         Date currentDate = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd-HH''mm''ss");
 
         return simpleDateFormat.format(currentDate) + "." + extension;
     }

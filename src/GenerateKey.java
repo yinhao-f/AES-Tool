@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-public class GenerateKeyToFile {
+public class GenerateKey {
     private void generateKey() throws IOException, NoSuchAlgorithmException {
         // Generate secret key
         KeyGenerator generator = KeyGenerator.getInstance("AES");
@@ -25,7 +25,7 @@ public class GenerateKeyToFile {
     }
 
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        GenerateKeyToFile keyGen = new GenerateKeyToFile();
+        GenerateKey keyGen = new GenerateKey();
         keyGen.generateKey();
     }
 }
