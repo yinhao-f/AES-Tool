@@ -9,11 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FileHandler {
-    /**
-     * Read string from file
-     * @param filePath the file to be read from
-     * @return content of file
-     */
+
     public static String readFromFile(String filePath) {
         try {
             File file = new File(filePath);
@@ -32,12 +28,6 @@ public class FileHandler {
         return null;
     }
 
-    /**
-     * Write string to file
-     * @param filePath the file to be read to
-     * @param content content of file
-     * @throws IOException if file exists, prevent from overwriting
-     */
     public static void writeToFile(String filePath, String content) throws IOException {
         // Prevent overwriting key files
         File file = new File(filePath);
@@ -57,11 +47,6 @@ public class FileHandler {
         }
     }
 
-    /**
-     * Generate file name for the key
-     * @param extension file extension
-     * @return file name in date format
-     */
     public static String fileNameGenerator(String extension) {
         Date currentDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd-HH''mm''ss");
