@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FileIO {
+public class FileHandler {
     /**
      * Read string from file
      * @param file the file to be read from

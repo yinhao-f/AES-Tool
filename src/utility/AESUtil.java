@@ -7,13 +7,13 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class Encryption {
+public class AESUtil {
     private static final Base64.Encoder base64Encoder = Base64.getEncoder();
     private static final Base64.Decoder base64Decoder = Base64.getDecoder();
 
     private static final String ALGORITHM = "AES/ECB/PKCS5Padding";
 
-    public static String encode(String content, SecretKey secretKey) {
+    public static String encodeToBase64(String content, SecretKey secretKey) {
         try {
             Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -27,7 +27,20 @@ public class Encryption {
         return null;
     }
 
-    public static String decode(String content, SecretKey secretKey) {
+    public static byte[] encodeToBytes(String content, SecretKey secretKey) {
+        try {
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
+            byte[] byteEncode = content.getBytes(StandardCharsets.UTF_8);
+            return cipher.doFinal(byteEncode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String decodeFromBase64(String content, SecretKey secretKey) {
         try {
             Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
@@ -41,8 +54,21 @@ public class Encryption {
         return null;
     }
 
+    public static String decodeFromBytes(byte[] bytes, SecretKey secretKey) {
+        try {
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+
+            byte[] byteDecode = cipher.doFinal(bytes);
+            return new String(byteDecode, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static SecretKey keyRetriever(File keyFile) {
-        String keyString = FileIO.readFromFile(keyFile);
+        String keyString = FileHandler.readFromFile(keyFile);
         return new SecretKeySpec(base64Decoder.decode(keyString), "AES");
     }
 }

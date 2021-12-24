@@ -1,4 +1,4 @@
-import utility.FileIO;
+import utility.FileHandler;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -18,8 +18,8 @@ public class GenerateKey {
         String keyString = Base64.getEncoder().encodeToString(secretKey.getEncoded());
 
         // Write key to file
-        File file = new File(FileIO.fileNameGenerator("key"));
-        FileIO.writeToFile(file, keyString);
+        File file = new File(FileHandler.fileNameGenerator("key"));
+        FileHandler.writeToFile(file, keyString);
 
         System.out.println("Generated key in " + file.getAbsolutePath());
     }
