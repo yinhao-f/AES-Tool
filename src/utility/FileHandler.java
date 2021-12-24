@@ -11,11 +11,12 @@ import java.util.Date;
 public class FileHandler {
     /**
      * Read string from file
-     * @param file the file to be read from
+     * @param filePath the file to be read from
      * @return content of file
      */
-    public static String readFromFile(File file) {
+    public static String readFromFile(String filePath) {
         try {
+            File file = new File(filePath);
             FileInputStream fis = new FileInputStream(file);
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -33,12 +34,13 @@ public class FileHandler {
 
     /**
      * Write string to file
-     * @param file the file to be read to
+     * @param filePath the file to be read to
      * @param content content of file
      * @throws IOException if file exists, prevent from overwriting
      */
-    public static void writeToFile(File file, String content) throws IOException {
+    public static void writeToFile(String filePath, String content) throws IOException {
         // Prevent overwriting key files
+        File file = new File(filePath);
         if (file.exists()) {
             throw new IOException("File already exists. Please try another file.");
         }

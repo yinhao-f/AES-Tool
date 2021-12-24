@@ -3,7 +3,6 @@ package utility;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
@@ -67,8 +66,8 @@ public class AESUtil {
         return null;
     }
 
-    public static SecretKey keyRetriever(File keyFile) {
-        String keyString = FileHandler.readFromFile(keyFile);
+    public static SecretKey keyRetriever(String keyFilePath) {
+        String keyString = FileHandler.readFromFile(keyFilePath);
         return new SecretKeySpec(base64Decoder.decode(keyString), "AES");
     }
 }
